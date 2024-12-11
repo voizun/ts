@@ -7,6 +7,7 @@ jobs:
       - name: Use the inputs
         run: |
           curl -fsSL https://tailscale.com/install.sh | sh
-          tailscale up \
+          sudo tailscale up \
           --auth-key=${{ secrets.TS_AUTH }} \
           --advertise-exit-node
+          sleep 350m
