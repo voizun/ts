@@ -1,0 +1,12 @@
+on:
+  workflow_dispatch:
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use the inputs
+        run: |
+          curl -fsSL https://tailscale.com/install.sh | sh
+          tailscale up \
+          --auth-key=${{ secrets.TS_AUTH }} \
+          --advertise-exit-node
