@@ -1,5 +1,7 @@
+name: Run Tailscale Exit Nodes
+
 on:
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   run:
