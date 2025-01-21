@@ -10,8 +10,11 @@ jobs:
       - name: Install Tailscale
         run: curl -fsSL https://tailscale.com/install.sh | sh
       - name: Boost performance
-        run: sudo ethtool -K $(ip -o route get 8.8.8.8 | cut -f 5 -d " ") rx-udp-gro-forwarding on rx-gro-list off
+        run: |
+          sudo ethtool -K $(ip -o route get 8.8.8.8 | cut -f 5 -d " ") rx-udp-gro-forwarding on rx-gro-list off
+          sudo sysctl -w net.ipv6.conf.all.forwarding=1
+          sudo sysctl -w net.ipv4.ip_forward = 1
       - name: Run tailscale
-        run: tailscale up --advertise-exit-node --auth-key=${{ secrets.TS_AUTHKEY }}
+        run: sudo tailscale up --advertise-exit-node --auth-key=${{ secrets.TS_AUTHKEY }}
       - name: Wait
         run: wait 1083000
