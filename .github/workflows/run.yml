@@ -16,5 +16,5 @@ jobs:
           sudo sysctl -w net.ipv4.ip_forward=1
       - name: Run tailscale
         run: sudo tailscale up --advertise-exit-node --auth-key=${{ secrets.TS_AUTHKEY }}
-      - name: Wait
-        run: wait 1083000
+      - name: Sleep...
+        run: sleep 1083000
