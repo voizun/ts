@@ -1,0 +1,15 @@
+on:
+  workflow_dispatch
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Tailscale
+        run: curl -fsSL https://tailscale.com/install.sh | sh
+      - name: Boost performance
+        run: sudo ethtool -K $(ip -o route get 8.8.8.8 | cut -f 5 -d " ") rx-udp-gro-forwarding on rx-gro-list off
+      - name: Run tailscale
+        run: tailscale up --advertise-exit-node --auth-key=${{ secrets.TS_AUTHKEY }}
+      - name: Wait
+        run: wait 1083000
