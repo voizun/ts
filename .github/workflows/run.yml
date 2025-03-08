@@ -13,6 +13,6 @@ jobs:
       - name: Install Tailscale
         run: curl -fsSL https://tailscale.com/install.sh | sh
       - name: Start Tailscale Server
-        run: sudo tailscale up --advertise-exit-node --auth-key={ secrets.TS_TOKEN }
+        run: sudo tailscale up --advertise-exit-node --auth-key=${{ secrets.TS_TOKEN }}
       - name: Waiting...
         run: sleep 340m
